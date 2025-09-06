@@ -1,0 +1,12 @@
+syntax = "proto3";
+package auth.v1;
+option java_multiple_files = true;
+option java_package = "com.operationhelper.grpc.auth.v1";
+option java_outer_classname = "AuthProto";
+
+service AuthService {
+  rpc Introspect (IntrospectRequest) returns (IntrospectResponse);
+}
+message IntrospectRequest { string token = 1; }
+message Claims { int64 user_id = 1; string username = 2; string role = 3; repeated string permissions = 4; }
+message IntrospectResponse { bool active = 1; string expires_at = 2; Claims claims = 3; }
